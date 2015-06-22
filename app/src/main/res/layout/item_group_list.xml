@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="@drawable/gray_selector"
+        >
+
+    <ImageView
+            android:id="@+id/group_image"
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/group_work_bg"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            />
+
+    <LinearLayout
+            android:layout_toLeftOf="@+id/group_image"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="20dp"
+            >
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mt_black"
+                android:text="Food"
+                android:textSize="24sp"
+                />
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/group_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mt_gray3"
+                android:text="Need to buy"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                app:textAllCaps="true"
+                />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

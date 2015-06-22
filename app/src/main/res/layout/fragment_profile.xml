@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center"
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/example_avatar"
+                />
+
+        <android.support.v7.widget.AppCompatTextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/mt_black"
+                android:text="eureka"
+                android:textSize="24sp"
+                />
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/profile_status_text"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/mt_black"
+                android:text=""
+                android:textSize="36sp"
+                />
+
+        <LinearLayout
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@color/mt_green">
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:text="COMPLTED"
+                        android:textSize="18sp"
+                        />
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/profile_completed_count_text"
+                        android:layout_marginTop="24dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="0"
+                        android:textSize="32sp"
+                        />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="140dp"
+                    android:background="@color/mt_red">
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:text="UNCOMPLTED"
+                        android:textSize="18sp"
+                        />
+                <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/profile_uncompleted_count_text"
+                        android:layout_marginTop="24dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="0"
+                        android:textSize="32sp"
+                        />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/mt_yellow">
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="ALL"
+                    android:textSize="18sp"
+                    />
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/profile_all_count_text"
+                    android:layout_marginTop="24dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="0"
+                    android:textSize="32sp"
+                    />
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

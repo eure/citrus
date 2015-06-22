@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+    <View
+            android:id="@+id/navigation_header_line"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/navigation_line"/>
+
+    <LinearLayout
+            android:layout_above="@id/navigation_header_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/navigation_profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/example_avatar"
+                />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="left|center"
+                >
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/eureka"
+                    android:textColor="@color/mt_black"
+                    android:textSize="20sp"
+                    />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/eureka_address"
+                    android:textColor="@color/mt_gray3"
+                    android:textSize="16sp"
+                    />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

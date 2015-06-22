@@ -1,0 +1,89 @@
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context="com.eure.citrus.ui.CreateNewTaskActivity"
+        >
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:theme="@style/ToolBarStyle"
+            />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/create_task_description"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColor="@color/mt_black"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:text="@string/create_new_description"
+            />
+
+    <FrameLayout
+            android:layout_below="@+id/create_task_description"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="32dp"
+                android:layout_gravity="top|center"
+                android:id="@+id/create_task_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:padding="12dp"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/TextAppearence.App.ErrorTextInputLayout"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+                >
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/create_task_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/mt_black"
+                    android:hint="@string/task_name"
+                    android:textSize="24sp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </FrameLayout>
+
+
+    <android.support.design.widget.CoordinatorLayout
+            android:layout_below="@+id/create_task_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/create_task_coordinator_layout"
+            >
+
+        <com.eure.citrus.ui.widget.BottomButton
+                android:id="@+id/create_task_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@color/mt_red"
+                android:textSize="16sp"
+                android:padding="16dp"
+                app:layout_anchor="@id/create_task_coordinator_layout"
+                app:layout_anchorGravity="bottom"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

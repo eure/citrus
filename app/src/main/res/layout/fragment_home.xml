@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/home_dayOfWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/mt_black"
+            android:text=""
+            android:textSize="36sp"
+            />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/home_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/mt_black"
+            android:text=""
+            android:textSize="12sp"
+            />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="32dp"
+            android:layout_gravity="center"
+            android:id="@+id/home_task_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text=""
+            android:textSize="40sp"
+            android:background="@drawable/green_circle"
+            />
+
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/home_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+</LinearLayout>
