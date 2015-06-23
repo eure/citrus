@@ -3,6 +3,7 @@ package com.eure.citrus.ui;
 import com.eure.citrus.R;
 import com.eure.citrus.helper.GroupHelper;
 import com.eure.citrus.model.RealmRepository;
+import com.eure.citrus.model.db.Task;
 import com.eure.citrus.ui.widget.BottomButton;
 
 import android.content.Context;
@@ -98,10 +99,20 @@ public class CreateNewTaskActivity extends AppCompatActivity {
         if (groupName == null) {
             groupName = GroupHelper.PRIVATE;
         }
-        RealmRepository.TaskObject.create(mUIThreadRealm, name, groupName);
+
+        final Task task = RealmRepository.TaskObject.create(mUIThreadRealm, name, groupName);
 
         mCreateTaskButton.setEnabled(true);
-        Snackbar.make(mCoordinatorLayout, getString(R.string.create_successfully, name), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(mCoordinatorLayout, getString(R.string.create_successfully, name), Snackbar.LENGTH_SHORT)
+                .setActionTextColor(getResources().getColor(android.R.color.white))
+                .setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        RealmRepository.TaskObject.delete(mUIThreadRealm, task);
+                    }
+                }
+                )
+                .show();
         mTaskNameEditText.setText("");
         mTextInputLayout.setError("");
         mCreatedTask = true;

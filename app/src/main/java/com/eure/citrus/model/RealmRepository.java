@@ -16,7 +16,7 @@ public class RealmRepository {
 
     public static class TaskObject {
 
-        public static void create(@NonNull Realm realm, @NonNull String name, String groupName) {
+        public static Task create(@NonNull Realm realm, @NonNull String name, String groupName) {
             realm.beginTransaction();
             Task task = realm.createObject(Task.class);
             task.setName(name);
@@ -24,12 +24,20 @@ public class RealmRepository {
                 task.setGroupName(groupName);
             }
             realm.commitTransaction();
+            return task;
         }
 
-        public static void updateByCompleted(@NonNull Realm realm, Task task, boolean completed) {
+        public static void delete(@NonNull Realm realm, Task task) {
+            realm.beginTransaction();
+            task.removeFromRealm();
+            realm.commitTransaction();
+        }
+
+        public static Task updateByCompleted(@NonNull Realm realm, Task task, boolean completed) {
             realm.beginTransaction();
             task.setCompleted(completed);
             realm.commitTransaction();
+            return task;
         }
 
         public static long count(@NonNull Realm realm) {

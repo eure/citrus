@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">citrus</string>
-    
     <string name="home">Home</string>
     <string name="groups">Groups</string>
     <string name="lists">Lists</string>
@@ -8,7 +7,6 @@
     <string name="setting">Setting</string>
     <string name="eureka">eureka</string>
     <string name="eureka_address">sample@eure.com</string>
-
     <string name="create_new">Create New</string>
     <string name="create_new_description">Stack the to-do list to me.</string>
     <string name="task_name">Task name</string>
@@ -19,5 +17,5 @@
     <string name="good_job">Good Job !</string>
     <string name="keep_it_up">Keep it up !</string>
     <string name="you_can_do_it">You can do it !</string>
-
+    <string name="undo">UNDO</string>
 </resources>

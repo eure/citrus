@@ -3,7 +3,7 @@ package com.eure.citrus.ui;
 import com.eure.citrus.R;
 import com.eure.citrus.Utils;
 import com.eure.citrus.listener.OnClickMainFABListener;
-import com.eure.citrus.listener.OnShowSnackbar;
+import com.eure.citrus.listener.OnMakeSnackbar;
 import com.eure.citrus.listener.SwipeableRecyclerViewTouchListener;
 import com.eure.citrus.model.RealmRepository;
 import com.eure.citrus.model.db.Task;
@@ -13,6 +13,7 @@ import com.eure.citrus.ui.widget.DividerItemDecoration;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -51,14 +52,14 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
     // Realm instance for the UI thread
     private Realm mUIThreadRealm;
 
-    private OnShowSnackbar mOnShowSnackbar;
+    private OnMakeSnackbar mOnMakeSnackbar;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (activity instanceof OnShowSnackbar) {
-            mOnShowSnackbar = (OnShowSnackbar) activity;
+        if (activity instanceof OnMakeSnackbar) {
+            mOnMakeSnackbar = (OnMakeSnackbar) activity;
         }
 
         mUIThreadRealm = Realm.getDefaultInstance();
@@ -99,27 +100,45 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView,
                                     int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    com.eure.citrus.model.db.Task task = uncompletedTasks.get(position);
+                                for (final int position : reverseSortedPositions) {
+                                    final Task task = uncompletedTasks.get(position);
                                     RealmRepository.TaskObject.updateByCompleted(mUIThreadRealm, task, true);
                                     mHomeTaskListAdapter.notifyItemRemoved(position);
-                                    showSnackbar(getString(R.string.complete_task, task.getName()));
+                                    showSnackbarWhenDismiss(getString(R.string.complete_task, task.getName()),
+                                            new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    RealmRepository.TaskObject
+                                                            .updateByCompleted(mUIThreadRealm, task, false);
+                                                    mHomeTaskListAdapter.notifyItemInserted(position);
+                                                    updateHomeTaskListAdapter();
+                                                }
+                                            });
                                 }
-                                mHomeTaskListAdapter.notifyDataSetChanged();
-                                mHomeTaskCountTextView.setText(String.valueOf(mHomeTaskListAdapter.getItemCount()));
+                                updateHomeTaskListAdapter();
+
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView,
                                     int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    com.eure.citrus.model.db.Task task = uncompletedTasks.get(position);
+                                for (final int position : reverseSortedPositions) {
+                                    final Task task = uncompletedTasks.get(position);
                                     RealmRepository.TaskObject.updateByCompleted(mUIThreadRealm, task, true);
                                     mHomeTaskListAdapter.notifyItemRemoved(position);
-                                    showSnackbar(getString(R.string.complete_task, task.getName()));
+                                    showSnackbarWhenDismiss(getString(R.string.complete_task, task.getName()),
+                                            new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    RealmRepository.TaskObject
+                                                            .updateByCompleted(mUIThreadRealm, task, false);
+                                                    mHomeTaskListAdapter.notifyItemInserted(position);
+                                                    updateHomeTaskListAdapter();
+                                                }
+                                            });
                                 }
-                                mHomeTaskListAdapter.notifyDataSetChanged();
-                                mHomeTaskCountTextView.setText(String.valueOf(mHomeTaskListAdapter.getItemCount()));
+                                updateHomeTaskListAdapter();
+
                             }
                         });
         recyclerView.addOnItemTouchListener(swipeTouchListener);
@@ -131,9 +150,12 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         homeDateTextView.setText(Utils.getDateString().toUpperCase());
     }
 
-    private void showSnackbar(String s) {
-        if (mOnShowSnackbar != null) {
-            mOnShowSnackbar.onShowSnackbar(s);
+
+    private void showSnackbarWhenDismiss(String text, View.OnClickListener listener) {
+        if (mOnMakeSnackbar != null) {
+            Snackbar snackbar = mOnMakeSnackbar.onMakeSnackbar(text, Snackbar.LENGTH_SHORT);
+            snackbar.setAction(R.string.undo, listener);
+            snackbar.show();
         }
     }
 
@@ -143,14 +165,18 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         switch (requestCode) {
             case REQUEST_CREATE_TASK_ACTIVITY:
                 if (resultCode == Activity.RESULT_OK) {
-                    final RealmResults<com.eure.citrus.model.db.Task> uncompletedTasks = RealmRepository.TaskObject
+                    final RealmResults<Task> uncompletedTasks = RealmRepository.TaskObject
                             .findAllByCompleted(mUIThreadRealm, false);
                     mHomeTaskListAdapter.setDate(uncompletedTasks);
-                    mHomeTaskListAdapter.notifyDataSetChanged();
-                    mHomeTaskCountTextView.setText(String.valueOf(uncompletedTasks.size()));
+                    updateHomeTaskListAdapter();
                 }
                 break;
         }
+    }
+
+    private void updateHomeTaskListAdapter() {
+        mHomeTaskListAdapter.notifyDataSetChanged();
+        mHomeTaskCountTextView.setText(String.valueOf(mHomeTaskListAdapter.getItemCount()));
     }
 
     @Override

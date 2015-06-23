@@ -43,6 +43,7 @@ public class GroupDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+
         Intent intent = getIntent();
         mGroupName = intent.getStringExtra(KEY_GROUP_NAME);
 

@@ -1,7 +1,7 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
-import com.eure.citrus.listener.OnShowSnackbar;
+import com.eure.citrus.listener.OnMakeSnackbar;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -28,7 +28,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static butterknife.ButterKnife.findById;
 
-public class MainActivity extends AppCompatActivity implements OnShowSnackbar {
+public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
 
     @InjectView(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
@@ -172,8 +172,8 @@ public class MainActivity extends AppCompatActivity implements OnShowSnackbar {
     }
 
     @Override
-    public void onShowSnackbar(String s) {
-        Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_SHORT).show();
+    public Snackbar onMakeSnackbar(CharSequence text, int duration) {
+        return Snackbar.make(mCoordinatorLayout, text, duration);
     }
 
 }

@@ -1,13 +1,12 @@
 package com.eure.citrus.model.db;
 
 import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
 
 /**
  * Created by katsuyagoto on 15/06/18.
  */
 public class Group extends RealmObject {
-    
+
     private String name;
 
     private String description;

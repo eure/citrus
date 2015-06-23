@@ -82,7 +82,8 @@
                 android:textSize="16sp"
                 android:padding="16dp"
                 app:layout_anchor="@id/create_task_coordinator_layout"
-                app:layout_anchorGravity="bottom"/>
+                app:layout_anchorGravity="bottom"
+                />
 
     </android.support.design.widget.CoordinatorLayout>
 
