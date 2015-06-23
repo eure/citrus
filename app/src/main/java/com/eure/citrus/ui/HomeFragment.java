@@ -2,7 +2,8 @@ package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
 import com.eure.citrus.Utils;
-import com.eure.citrus.listener.OnClickFABListener;
+import com.eure.citrus.listener.OnClickMainFABListener;
+import com.eure.citrus.listener.OnShowSnackbar;
 import com.eure.citrus.listener.SwipeableRecyclerViewTouchListener;
 import com.eure.citrus.model.RealmRepository;
 import com.eure.citrus.model.db.Task;
@@ -31,7 +32,7 @@ import static butterknife.ButterKnife.findById;
 /**
  * Created by katsuyagoto on 15/06/18.
  */
-public class HomeFragment extends Fragment implements OnClickFABListener {
+public class HomeFragment extends Fragment implements OnClickMainFABListener {
 
     private static final int REQUEST_CREATE_TASK_ACTIVITY = 1000;
 
@@ -50,9 +51,15 @@ public class HomeFragment extends Fragment implements OnClickFABListener {
     // Realm instance for the UI thread
     private Realm mUIThreadRealm;
 
+    private OnShowSnackbar mOnShowSnackbar;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        if (activity instanceof OnShowSnackbar) {
+            mOnShowSnackbar = (OnShowSnackbar) activity;
+        }
 
         mUIThreadRealm = Realm.getDefaultInstance();
     }
@@ -125,13 +132,9 @@ public class HomeFragment extends Fragment implements OnClickFABListener {
     }
 
     private void showSnackbar(String s) {
-        ((MainActivity) getActivity()).showSnackbar(s);
-    }
-
-    @Override
-    public void onClickFAB() {
-        Intent intent = new Intent(getActivity(), CreateNewTaskActivity.class);
-        startActivityForResult(intent, REQUEST_CREATE_TASK_ACTIVITY);
+        if (mOnShowSnackbar != null) {
+            mOnShowSnackbar.onShowSnackbar(s);
+        }
     }
 
     @Override
@@ -161,4 +164,11 @@ public class HomeFragment extends Fragment implements OnClickFABListener {
         super.onDestroy();
         mUIThreadRealm.close();
     }
+
+    @Override
+    public void onClickMainFAB() {
+        Intent intent = new Intent(getActivity(), CreateNewTaskActivity.class);
+        startActivityForResult(intent, REQUEST_CREATE_TASK_ACTIVITY);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
+import com.eure.citrus.listener.OnShowSnackbar;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -24,15 +25,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import static butterknife.ButterKnife.findById;
 
-public class MainActivity extends AppCompatActivity {
-
-    public enum State {
-        HOME, GROUPS, LISTS, PROFILE
-    }
-
-    @InjectView(R.id.toolbar)
-    Toolbar mToolbar;
+public class MainActivity extends AppCompatActivity implements OnShowSnackbar {
 
     @InjectView(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
@@ -40,15 +35,12 @@ public class MainActivity extends AppCompatActivity {
     @InjectView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @InjectView(R.id.navigation_view)
-    NavigationView mNavigationView;
-
     @InjectView(R.id.main_fab)
     FloatingActionButton mFloatingActionButton;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private State mCurrentState;
+    private int mCurrentMenu;
 
     private HomeFragment mHomeFragment;
 
@@ -63,81 +55,70 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        setSupportActionBar(mToolbar);
-        setNavigationView();
-        switchFragment(State.HOME);
+        Toolbar toolbar = findById(this, R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setNavigationView(toolbar);
+        switchFragment(R.id.home);
     }
 
-    private void switchFragment(State state) {
-        mCurrentState = state;
+    private void switchFragment(int menuId) {
+        mCurrentMenu = menuId;
         ActionBar actionBar = getSupportActionBar();
-        switch (state) {
-            case HOME:
+        switch (menuId) {
+            case R.id.home:
                 if (actionBar != null) {
                     actionBar.setTitle(R.string.home);
                 }
                 if (mHomeFragment == null) {
                     mHomeFragment = HomeFragment.newInstance();
                 }
-                replaceMainFragment(mHomeFragment);
                 mFloatingActionButton.setVisibility(View.VISIBLE);
+                replaceMainFragment(mHomeFragment);
                 break;
-            case GROUPS:
+            case R.id.groups:
                 if (actionBar != null) {
                     actionBar.setTitle(R.string.groups);
                 }
                 if (mGroupsFragment == null) {
                     mGroupsFragment = GroupsFragment.newInstance();
                 }
-                replaceMainFragment(mGroupsFragment);
                 mFloatingActionButton.setVisibility(View.GONE);
+                replaceMainFragment(mGroupsFragment);
                 break;
-            case LISTS:
+            case R.id.lists:
                 if (actionBar != null) {
                     actionBar.setTitle(R.string.lists);
                 }
                 if (mListsFragment == null) {
                     mListsFragment = ListsFragment.newInstance();
                 }
-                replaceMainFragment(mListsFragment);
                 mFloatingActionButton.setVisibility(View.GONE);
+                replaceMainFragment(mListsFragment);
                 break;
-            case PROFILE:
+            case R.id.profile:
                 if (actionBar != null) {
                     actionBar.setTitle(R.string.profile);
                 }
                 if (mProfileFragment == null) {
                     mProfileFragment = ProfileFragment.newInstance();
                 }
-                replaceMainFragment(mProfileFragment);
                 mFloatingActionButton.setVisibility(View.GONE);
+                replaceMainFragment(mProfileFragment);
+                break;
+            default:
                 break;
         }
     }
 
-    private void setNavigationView() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.app_name, R.string.app_name);
+    private void setNavigationView(Toolbar toolbar) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        NavigationView navigationView = findById(this, R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.home:
-                        switchFragment(State.HOME);
-                        break;
-                    case R.id.groups:
-                        switchFragment(State.GROUPS);
-                        break;
-                    case R.id.lists:
-                        switchFragment(State.LISTS);
-                        break;
-                    case R.id.profile:
-                        switchFragment(State.PROFILE);
-                        break;
-                    default:
-                        break;
-                }
+                switchFragment(menuItem.getItemId());
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return false;
@@ -178,18 +159,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showSnackbar(String s) {
-        Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_SHORT).show();
-    }
-
     @OnClick(R.id.main_fab)
-    public void onClickFloatingActionButton() {
-        switch (mCurrentState) {
-            case HOME:
+    public void onClickFAB() {
+        switch (mCurrentMenu) {
+            case R.id.home:
                 if (mHomeFragment != null) {
-                    mHomeFragment.onClickFAB();
+                    mHomeFragment.onClickMainFAB();
                 }
                 break;
         }
     }
+
+    @Override
+    public void onShowSnackbar(String s) {
+        Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_SHORT).show();
+    }
+
 }
