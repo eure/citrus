@@ -6,19 +6,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabSelectedTextColor="@color/mt_black"
-                app:tabIndicatorColor="@color/mt_green"
-                app:tabTextColor="@color/mt_black"
-                />
+    <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabSelectedTextColor="@color/mt_black"
+            app:tabIndicatorColor="@color/mt_green"
+            app:tabTextColor="@color/mt_black"
+            />
 
-        <android.support.v4.view.ViewPager
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/groups_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+    <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/groups_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </LinearLayout>

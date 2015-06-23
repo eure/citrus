@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 import static butterknife.ButterKnife.findById;
 
 public class MainActivity extends AppCompatActivity implements OnShowSnackbar {
