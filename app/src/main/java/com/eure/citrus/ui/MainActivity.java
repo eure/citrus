@@ -1,7 +1,6 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
-import com.eure.citrus.listener.OnViewCreatedListener;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -10,7 +9,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -48,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @InjectView(R.id.main_fab)
     FloatingActionButton mFloatingActionButton;
 
-    @InjectView(R.id.tab_layout)
-    TabLayout mTabLayout;
-
     private ActionBarDrawerToggle mDrawerToggle;
 
     private State mCurrentState;
@@ -85,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     mHomeFragment = HomeFragment.newInstance();
                 }
                 replaceMainFragment(mHomeFragment);
-                mTabLayout.setVisibility(View.GONE);
                 mFloatingActionButton.setVisibility(View.VISIBLE);
                 break;
             case GROUPS:
@@ -96,13 +90,6 @@ public class MainActivity extends AppCompatActivity {
                     mGroupsFragment = GroupsFragment.newInstance();
                 }
                 replaceMainFragment(mGroupsFragment);
-                mGroupsFragment.setOnViewCreatedListener(new OnViewCreatedListener() {
-                    @Override
-                    public void onViewCreated() {
-                        mTabLayout.setupWithViewPager(mGroupsFragment.mViewPager);
-                    }
-                });
-                mTabLayout.setVisibility(View.VISIBLE);
                 mFloatingActionButton.setVisibility(View.GONE);
                 break;
             case LISTS:
@@ -113,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                     mListsFragment = ListsFragment.newInstance();
                 }
                 replaceMainFragment(mListsFragment);
-                mTabLayout.setVisibility(View.GONE);
                 mFloatingActionButton.setVisibility(View.GONE);
                 break;
             case PROFILE:
@@ -124,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     mProfileFragment = ProfileFragment.newInstance();
                 }
                 replaceMainFragment(mProfileFragment);
-                mTabLayout.setVisibility(View.GONE);
                 mFloatingActionButton.setVisibility(View.GONE);
                 break;
         }

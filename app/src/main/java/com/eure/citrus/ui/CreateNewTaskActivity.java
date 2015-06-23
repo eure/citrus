@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import io.realm.Realm;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static butterknife.ButterKnife.findById;
 
@@ -104,6 +105,12 @@ public class CreateNewTaskActivity extends AppCompatActivity {
         mTaskNameEditText.setText("");
         mTextInputLayout.setError("");
         mCreatedTask = true;
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

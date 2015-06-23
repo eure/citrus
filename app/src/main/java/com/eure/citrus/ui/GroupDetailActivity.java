@@ -17,6 +17,7 @@ import android.widget.ImageView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static butterknife.ButterKnife.findById;
 
@@ -58,6 +59,11 @@ public class GroupDetailActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.group_detail_container, mListsFragment)
                 .commit();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @OnClick(R.id.group_detail_fab)

@@ -5,7 +5,6 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:context="com.eure.citrus.ui.MainActivity"
         android:background="@android:color/white">
 
@@ -13,13 +12,13 @@
             android:id="@+id/coordinator_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            >
 
         <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                android:fitsSystemWindows="true">
+                >
 
             <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -28,15 +27,6 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:theme="@style/ToolBarStyle"
                     />
-
-            <android.support.design.widget.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabSelectedTextColor="@color/mt_black"
-                    app:tabIndicatorColor="@color/mt_green"
-                    app:tabTextColor="@color/mt_black"
-                    android:visibility="gone"/>
 
         </android.support.design.widget.AppBarLayout>
 
@@ -65,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true"
             android:background="@android:color/white"
             app:headerLayout="@layout/navigation_header"
             app:menu="@menu/navigation_items"

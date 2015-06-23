@@ -2,10 +2,10 @@ package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
 import com.eure.citrus.helper.GroupHelper;
-import com.eure.citrus.listener.OnViewCreatedListener;
 import com.eure.citrus.ui.adapter.GroupPagerAdapter;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -27,7 +27,8 @@ public class GroupsFragment extends Fragment {
         return new GroupsFragment();
     }
 
-    private OnViewCreatedListener mOnViewCreatedListener;
+    @InjectView(R.id.tab_layout)
+    TabLayout mTabLayout;
 
     @InjectView(R.id.groups_viewpager)
     ViewPager mViewPager;
@@ -43,7 +44,7 @@ public class GroupsFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setViewPager(mViewPager);
-        mOnViewCreatedListener.onViewCreated();
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     private void setViewPager(ViewPager viewPager) {
@@ -51,10 +52,6 @@ public class GroupsFragment extends Fragment {
         adapter.addCategory(GroupHelper.CATEGORY_POPULAR);
         adapter.addCategory(GroupHelper.CATEGORY_LATEST);
         viewPager.setAdapter(adapter);
-    }
-
-    public void setOnViewCreatedListener(OnViewCreatedListener onViewCreatedListener) {
-        mOnViewCreatedListener = onViewCreatedListener;
     }
 
     @Override
