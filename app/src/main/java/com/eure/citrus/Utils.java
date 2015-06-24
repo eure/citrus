@@ -1,10 +1,12 @@
 package com.eure.citrus;
 
+import com.eure.citrus.listener.OnCanSetLayoutParamsListener;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
+import android.support.design.widget.FloatingActionButton;
+import android.view.ViewTreeObserver;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,5 +37,24 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         String date = dayFormat.format(calendar.getTime());
         return date;
+    }
+
+    public static void setFabLayoutParams(final FloatingActionButton floatingActionButton, final OnCanSetLayoutParamsListener onCanSetLayoutParamsListener) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            ViewTreeObserver viewTreeObserver = floatingActionButton.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                            floatingActionButton.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        } else {
+                            floatingActionButton.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                        onCanSetLayoutParamsListener.onCanSetLayoutParams();
+                    }
+                });
+            }
+        }
     }
 }

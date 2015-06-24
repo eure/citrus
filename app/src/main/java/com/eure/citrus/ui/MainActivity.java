@@ -1,6 +1,8 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
+import com.eure.citrus.Utils;
+import com.eure.citrus.listener.OnCanSetLayoutParamsListener;
 import com.eure.citrus.listener.OnMakeSnackbar;
 
 import android.content.Context;
@@ -58,8 +60,21 @@ public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
         ButterKnife.inject(this);
         Toolbar toolbar = findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
+        setFloatingActionButton();
         setNavigationView(toolbar);
         switchFragment(R.id.home);
+    }
+
+    private void setFloatingActionButton() {
+        Utils.setFabLayoutParams(mFloatingActionButton, new OnCanSetLayoutParamsListener() {
+            @Override
+            public void onCanSetLayoutParams() {
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mFloatingActionButton
+                        .getLayoutParams();
+                params.setMargins(0, 0, 0, 0);
+                mFloatingActionButton.setLayoutParams(params);
+            }
+        });
     }
 
     private void switchFragment(int menuId) {

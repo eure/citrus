@@ -1,13 +1,17 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
+import com.eure.citrus.Utils;
 import com.eure.citrus.helper.GroupHelper;
+import com.eure.citrus.listener.OnCanSetLayoutParamsListener;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +47,7 @@ public class GroupDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        setFloatingActionButton();
 
         Intent intent = getIntent();
         mGroupName = intent.getStringExtra(KEY_GROUP_NAME);
@@ -60,6 +65,19 @@ public class GroupDetailActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.group_detail_container, mListsFragment)
                 .commit();
+    }
+
+    private void setFloatingActionButton() {
+        final FloatingActionButton floatingActionButton = findById(this, R.id.group_detail_fab);
+        Utils.setFabLayoutParams(floatingActionButton, new OnCanSetLayoutParamsListener() {
+            @Override
+            public void onCanSetLayoutParams() {
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) floatingActionButton
+                        .getLayoutParams();
+                params.setMargins(0, 0, 0, 0);
+                floatingActionButton.setLayoutParams(params);
+            }
+        });
     }
 
     @Override

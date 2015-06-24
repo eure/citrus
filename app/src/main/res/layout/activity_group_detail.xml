@@ -53,6 +53,7 @@
             app:fabSize="normal"
             app:backgroundTint="@color/mt_red"
             android:src="@drawable/plus"
+            android:layout_margin="16dp"
             />
 
 </android.support.design.widget.CoordinatorLayout>
