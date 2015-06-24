@@ -25,16 +25,16 @@ public class GroupHelper {
     public static void setupDefaultGroup(@NonNull String groupName, ImageView imageView) {
         switch (groupName) {
             case WORK:
-                imageView.setImageResource(R.drawable.group_work_bg);
+                imageView.setImageResource(R.drawable.group_work);
                 break;
             case FOOD:
-                imageView.setImageResource(R.drawable.group_food_bg);
+                imageView.setImageResource(R.drawable.group_food);
                 break;
             case TRAVEL:
-                imageView.setImageResource(R.drawable.group_trip_bg);
+                imageView.setImageResource(R.drawable.group_travel);
                 break;
             case PRIVATE:
-                imageView.setImageResource(R.drawable.group_private_bg);
+                imageView.setImageResource(R.drawable.group_private);
                 break;
         }
     }

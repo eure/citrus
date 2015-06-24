@@ -11,7 +11,7 @@
             android:id="@+id/group_image"
             android:layout_width="148dp"
             android:layout_height="match_parent"
-            android:src="@drawable/group_work_bg"
+            android:src="@drawable/group_work"
             android:scaleType="centerCrop"
             android:layout_alignParentRight="true"
             />

@@ -86,7 +86,7 @@ public class RealmRepository {
 
             Group workGroup = realm.createObject(Group.class);
             workGroup.setName(GroupHelper.WORK);
-            workGroup.setDescription("Freelance Projects");
+            workGroup.setDescription("Great Projects");
             workGroup.setCategoryName(GroupHelper.CATEGORY_POPULAR);
             workGroup.setDefaultGroup(true);
 
@@ -104,7 +104,7 @@ public class RealmRepository {
 
             Group privateGroup = realm.createObject(Group.class);
             privateGroup.setName(GroupHelper.PRIVATE);
-            privateGroup.setDescription("Free space");
+            privateGroup.setDescription("Private tasks");
             privateGroup.setCategoryName(GroupHelper.CATEGORY_POPULAR);
             privateGroup.setDefaultGroup(true);
 
