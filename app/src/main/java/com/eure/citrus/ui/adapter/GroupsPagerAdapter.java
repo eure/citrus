@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by katsuyagoto on 15/06/19.
  */
-public class GroupPagerAdapter extends FragmentPagerAdapter {
+public class GroupsPagerAdapter extends FragmentPagerAdapter {
 
     private final List<String> mCategoryNames = new ArrayList<>();
 
-    public GroupPagerAdapter(FragmentManager fm) {
+    public GroupsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

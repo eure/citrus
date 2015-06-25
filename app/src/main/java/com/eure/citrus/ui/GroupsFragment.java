@@ -2,7 +2,7 @@ package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
 import com.eure.citrus.helper.GroupHelper;
-import com.eure.citrus.ui.adapter.GroupPagerAdapter;
+import com.eure.citrus.ui.adapter.GroupsPagerAdapter;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -48,7 +48,7 @@ public class GroupsFragment extends Fragment {
     }
 
     private void setViewPager(ViewPager viewPager) {
-        final GroupPagerAdapter adapter = new GroupPagerAdapter(getChildFragmentManager());
+        final GroupsPagerAdapter adapter = new GroupsPagerAdapter(getChildFragmentManager());
         adapter.addCategory(GroupHelper.CATEGORY_POPULAR);
         adapter.addCategory(GroupHelper.CATEGORY_LATEST);
         viewPager.setAdapter(adapter);

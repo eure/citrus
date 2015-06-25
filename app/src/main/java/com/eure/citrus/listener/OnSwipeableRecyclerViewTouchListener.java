@@ -40,7 +40,7 @@ import java.util.List;
 
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
-public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
+public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
 
     // Cached ViewConfiguration and system-wide constant values
     private int mSlop;
@@ -91,7 +91,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      * @param recyclerView The recycler view whose items should be dismissable by swiping.
      * @param listener     The listener for the swipe events.
      */
-    public SwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
+    public OnSwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
         ViewConfiguration vc = ViewConfiguration.get(recyclerView.getContext());
         mSlop = vc.getScaledTouchSlop();
         mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
@@ -364,7 +364,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
     }
 
     /**
-     * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
+     * The callback interface used by {@link OnSwipeableRecyclerViewTouchListener} to inform its client
      * about a swipe of one or more list item positions.
      */
     public interface SwipeListener {

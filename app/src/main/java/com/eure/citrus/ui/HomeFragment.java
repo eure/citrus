@@ -4,7 +4,7 @@ import com.eure.citrus.R;
 import com.eure.citrus.Utils;
 import com.eure.citrus.listener.OnClickMainFABListener;
 import com.eure.citrus.listener.OnMakeSnackbar;
-import com.eure.citrus.listener.SwipeableRecyclerViewTouchListener;
+import com.eure.citrus.listener.OnSwipeableRecyclerViewTouchListener;
 import com.eure.citrus.model.entity.Task;
 import com.eure.citrus.model.repository.TaskRepository;
 import com.eure.citrus.ui.adapter.HomeTaskListAdapter;
@@ -89,9 +89,9 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mHomeTaskListAdapter);
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(recyclerView,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+        OnSwipeableRecyclerViewTouchListener swipeTouchListener =
+                new OnSwipeableRecyclerViewTouchListener(recyclerView,
+                        new OnSwipeableRecyclerViewTouchListener.SwipeListener() {
                             @Override
                             public boolean canSwipe(int position) {
                                 return true;
