@@ -16,7 +16,7 @@ import java.util.Locale;
  * Created by katsuyagoto on 15/06/18.
  */
 public class Utils {
-    
+
     public static Drawable getDrawableResource(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return context.getDrawable(id);
@@ -39,7 +39,8 @@ public class Utils {
         return date;
     }
 
-    public static void setFabLayoutParams(final FloatingActionButton floatingActionButton, final OnCanSetLayoutParamsListener onCanSetLayoutParamsListener) {
+    public static void setFabLayoutParams(final FloatingActionButton floatingActionButton,
+            final OnCanSetLayoutParamsListener onCanSetLayoutParamsListener) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             ViewTreeObserver viewTreeObserver = floatingActionButton.getViewTreeObserver();
             if (viewTreeObserver.isAlive()) {

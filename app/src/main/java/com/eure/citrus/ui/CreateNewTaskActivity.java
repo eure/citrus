@@ -106,11 +106,11 @@ public class CreateNewTaskActivity extends AppCompatActivity {
         Snackbar.make(mCoordinatorLayout, getString(R.string.create_successfully, name), Snackbar.LENGTH_SHORT)
                 .setActionTextColor(getResources().getColor(android.R.color.white))
                 .setAction(R.string.undo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        RealmRepository.TaskObject.delete(mUIThreadRealm, task);
-                    }
-                }
+                            @Override
+                            public void onClick(View view) {
+                                RealmRepository.TaskObject.delete(mUIThreadRealm, task);
+                            }
+                        }
                 )
                 .show();
         mTaskNameEditText.setText("");
@@ -140,7 +140,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
                 if (mCreatedTask) {
                     setResult(RESULT_OK);
                 }
-                super.supportFinishAfterTransition();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

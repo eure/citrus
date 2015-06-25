@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import io.realm.RealmResults;
 
 /**
@@ -26,9 +28,9 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
 
     private RealmResults<Task> mTasks;
 
-    private static boolean mShowGroupName = true;
+    private static boolean sShowGroupName = true;
 
-    private static OnRecyclerItemClickListener mOnRecyclerItemClickListener;
+    private static OnRecyclerItemClickListener sOnRecyclerItemClickListener;
 
     public ListsTaskListAdapter(Context context, RealmResults<Task> tasks,
             OnRecyclerItemClickListener onRecyclerItemClickListener, boolean showGroupName) {
@@ -36,8 +38,8 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
         mResources = context.getResources();
         mLayoutInflater = LayoutInflater.from(context);
         mTasks = tasks;
-        mOnRecyclerItemClickListener = onRecyclerItemClickListener;
-        mShowGroupName = showGroupName;
+        sOnRecyclerItemClickListener = onRecyclerItemClickListener;
+        sShowGroupName = showGroupName;
     }
 
     public void setData(RealmResults<Task> tasks) {
@@ -83,16 +85,17 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @InjectView(R.id.lists_task_name)
         AppCompatCheckedTextView taskNameText;
 
+        @InjectView(R.id.lists_task_group)
         AppCompatTextView taskGroupText;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            taskNameText = (AppCompatCheckedTextView) v.findViewById(R.id.lists_task_name);
-            taskGroupText = (AppCompatTextView) v.findViewById(R.id.lists_task_group);
-            if (!mShowGroupName) {
+            ButterKnife.inject(this, v);
+            if (!sShowGroupName) {
                 taskGroupText.setVisibility(View.GONE);
             }
         }
@@ -101,7 +104,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
         public void onClick(View view) {
             int position = this.getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                mOnRecyclerItemClickListener.onClickRecyclerItem(view, position);
+                sOnRecyclerItemClickListener.onClickRecyclerItem(view, position);
             }
         }
     }
