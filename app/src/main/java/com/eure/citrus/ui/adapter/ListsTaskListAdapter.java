@@ -2,7 +2,7 @@ package com.eure.citrus.ui.adapter;
 
 import com.eure.citrus.R;
 import com.eure.citrus.listener.OnRecyclerItemClickListener;
-import com.eure.citrus.model.db.Task;
+import com.eure.citrus.model.entity.Task;
 
 import android.content.Context;
 import android.content.res.Resources;

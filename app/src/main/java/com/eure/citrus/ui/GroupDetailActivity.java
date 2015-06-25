@@ -58,7 +58,7 @@ public class GroupDetailActivity extends AppCompatActivity {
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(android.R.color.white));
 
         ImageView headerImageView = findById(this, R.id.backdrop);
-        GroupHelper.setupDefaultGroup(mGroupName, headerImageView);
+        GroupHelper.setupDefaultGroupImage(mGroupName, headerImageView);
 
         mListsFragment = ListsFragment.newInstance(mGroupName);
         FragmentManager manager = getSupportFragmentManager();

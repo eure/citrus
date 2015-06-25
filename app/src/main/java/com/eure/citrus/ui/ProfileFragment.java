@@ -1,7 +1,7 @@
 package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
-import com.eure.citrus.model.RealmRepository;
+import com.eure.citrus.model.repository.TaskRepository;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -50,15 +50,15 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         AppCompatTextView uncompletedTaskCount = findById(view, R.id.profile_uncompleted_count_text);
-        long uncompletedCount = RealmRepository.TaskObject.countByCompleted(mUIThreadRealm, false);
+        long uncompletedCount = TaskRepository.countByCompleted(mUIThreadRealm, false);
         uncompletedTaskCount.setText(String.valueOf(uncompletedCount));
 
         AppCompatTextView completedTaskCount = findById(view, R.id.profile_completed_count_text);
-        long completedCount = RealmRepository.TaskObject.countByCompleted(mUIThreadRealm, true);
+        long completedCount = TaskRepository.countByCompleted(mUIThreadRealm, true);
         completedTaskCount.setText(String.valueOf(completedCount));
 
         AppCompatTextView allTaskCount = findById(view, R.id.profile_all_count_text);
-        long allCount = RealmRepository.TaskObject.count(mUIThreadRealm);
+        long allCount = TaskRepository.count(mUIThreadRealm);
         allTaskCount.setText(String.valueOf(allCount));
 
         AppCompatTextView status = findById(view, R.id.profile_status_text);

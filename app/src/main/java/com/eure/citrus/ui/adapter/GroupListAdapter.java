@@ -3,7 +3,7 @@ package com.eure.citrus.ui.adapter;
 import com.eure.citrus.R;
 import com.eure.citrus.helper.GroupHelper;
 import com.eure.citrus.listener.OnRecyclerItemClickListener;
-import com.eure.citrus.model.db.Group;
+import com.eure.citrus.model.entity.Group;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
@@ -50,7 +50,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         holder.groupDescriptionText.setText(group.getDescription());
 
         if (group.isDefaultGroup()) {
-            GroupHelper.setupDefaultGroup(group.getName(), holder.groupImageView);
+            GroupHelper.setupDefaultGroupImage(group.getName(), holder.groupImageView);
         }
     }
 

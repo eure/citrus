@@ -2,8 +2,8 @@ package com.eure.citrus.ui;
 
 import com.eure.citrus.R;
 import com.eure.citrus.helper.GroupHelper;
-import com.eure.citrus.model.RealmRepository;
-import com.eure.citrus.model.db.Task;
+import com.eure.citrus.model.entity.Task;
+import com.eure.citrus.model.repository.TaskRepository;
 import com.eure.citrus.ui.widget.BottomButton;
 
 import android.content.Context;
@@ -100,7 +100,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
             groupName = GroupHelper.PRIVATE;
         }
 
-        final Task task = RealmRepository.TaskObject.create(mUIThreadRealm, name, groupName);
+        final Task task = TaskRepository.create(mUIThreadRealm, name, groupName);
 
         mCreateTaskButton.setEnabled(true);
         Snackbar.make(mCoordinatorLayout, getString(R.string.create_successfully, name), Snackbar.LENGTH_SHORT)
@@ -108,7 +108,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
                 .setAction(R.string.undo, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                RealmRepository.TaskObject.delete(mUIThreadRealm, task);
+                                TaskRepository.delete(mUIThreadRealm, task);
                             }
                         }
                 )

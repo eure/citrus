@@ -4,8 +4,8 @@ import com.eure.citrus.R;
 import com.eure.citrus.Utils;
 import com.eure.citrus.helper.GroupHelper;
 import com.eure.citrus.listener.OnRecyclerItemClickListener;
-import com.eure.citrus.model.RealmRepository;
-import com.eure.citrus.model.db.Group;
+import com.eure.citrus.model.entity.Group;
+import com.eure.citrus.model.repository.GroupRepository;
 import com.eure.citrus.ui.adapter.GroupListAdapter;
 import com.eure.citrus.ui.widget.DividerItemDecoration;
 
@@ -64,7 +64,7 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
         super.onViewCreated(view, savedInstanceState);
 
         String categoryName = GroupHelper.CATEGORY_POPULAR;
-        RealmResults<Group> groups = RealmRepository.GroupObject.findAllByCategoryName(mUIThreadRealm, categoryName);
+        RealmResults<Group> groups = GroupRepository.findAllByCategoryName(mUIThreadRealm, categoryName);
         mGroupListAdapter = new GroupListAdapter(getActivity(), groups, this);
 
         RecyclerView recyclerView = findById(view, R.id.group_list_recycler_view);

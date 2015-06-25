@@ -1,4 +1,4 @@
-package com.eure.citrus.model.db;
+package com.eure.citrus.model.entity;
 
 import io.realm.RealmObject;
 

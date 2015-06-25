@@ -5,8 +5,8 @@ import com.eure.citrus.Utils;
 import com.eure.citrus.listener.OnClickMainFABListener;
 import com.eure.citrus.listener.OnMakeSnackbar;
 import com.eure.citrus.listener.SwipeableRecyclerViewTouchListener;
-import com.eure.citrus.model.RealmRepository;
-import com.eure.citrus.model.db.Task;
+import com.eure.citrus.model.entity.Task;
+import com.eure.citrus.model.repository.TaskRepository;
 import com.eure.citrus.ui.adapter.HomeTaskListAdapter;
 import com.eure.citrus.ui.widget.DividerItemDecoration;
 
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final RealmResults<Task> uncompletedTasks = RealmRepository.TaskObject
+        final RealmResults<Task> uncompletedTasks = TaskRepository
                 .findAllByCompleted(mUIThreadRealm, false);
         mHomeTaskCountTextView.setText(String.valueOf(uncompletedTasks.size()));
         mHomeTaskListAdapter = new HomeTaskListAdapter(getActivity(), uncompletedTasks);
@@ -102,13 +102,13 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
                                     int[] reverseSortedPositions) {
                                 for (final int position : reverseSortedPositions) {
                                     final Task task = uncompletedTasks.get(position);
-                                    RealmRepository.TaskObject.updateByCompleted(mUIThreadRealm, task, true);
+                                    TaskRepository.updateByCompleted(mUIThreadRealm, task, true);
                                     mHomeTaskListAdapter.notifyItemRemoved(position);
                                     showSnackbarWhenDismiss(getString(R.string.complete_task, task.getName()),
                                             new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    RealmRepository.TaskObject
+                                                    TaskRepository
                                                             .updateByCompleted(mUIThreadRealm, task, false);
                                                     mHomeTaskListAdapter.notifyItemInserted(position);
                                                     updateHomeTaskListAdapter();
@@ -124,13 +124,13 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
                                     int[] reverseSortedPositions) {
                                 for (final int position : reverseSortedPositions) {
                                     final Task task = uncompletedTasks.get(position);
-                                    RealmRepository.TaskObject.updateByCompleted(mUIThreadRealm, task, true);
+                                    TaskRepository.updateByCompleted(mUIThreadRealm, task, true);
                                     mHomeTaskListAdapter.notifyItemRemoved(position);
                                     showSnackbarWhenDismiss(getString(R.string.complete_task, task.getName()),
                                             new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    RealmRepository.TaskObject
+                                                    TaskRepository
                                                             .updateByCompleted(mUIThreadRealm, task, false);
                                                     mHomeTaskListAdapter.notifyItemInserted(position);
                                                     updateHomeTaskListAdapter();
@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         switch (requestCode) {
             case REQUEST_CREATE_TASK_ACTIVITY:
                 if (resultCode == Activity.RESULT_OK) {
-                    final RealmResults<Task> uncompletedTasks = RealmRepository.TaskObject
+                    final RealmResults<Task> uncompletedTasks = TaskRepository
                             .findAllByCompleted(mUIThreadRealm, false);
                     mHomeTaskListAdapter.setDate(uncompletedTasks);
                     updateHomeTaskListAdapter();

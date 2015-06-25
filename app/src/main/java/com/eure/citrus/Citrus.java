@@ -1,6 +1,6 @@
 package com.eure.citrus;
 
-import com.eure.citrus.model.RealmRepository;
+import com.eure.citrus.model.repository.GroupRepository;
 import com.squareup.leakcanary.LeakCanary;
 
 import android.app.Application;
@@ -30,7 +30,7 @@ public class Citrus extends Application {
         Realm.setDefaultConfiguration(realmConfiguration);
 
         Realm realm = Realm.getDefaultInstance();
-        RealmRepository.GroupObject
+        GroupRepository
                 .createDefaultGroups(realm);
         realm.close();
     }

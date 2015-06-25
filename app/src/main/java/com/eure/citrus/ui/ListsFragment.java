@@ -3,8 +3,8 @@ package com.eure.citrus.ui;
 import com.eure.citrus.R;
 import com.eure.citrus.Utils;
 import com.eure.citrus.listener.OnRecyclerItemClickListener;
-import com.eure.citrus.model.RealmRepository;
-import com.eure.citrus.model.db.Task;
+import com.eure.citrus.model.entity.Task;
+import com.eure.citrus.model.repository.TaskRepository;
 import com.eure.citrus.ui.adapter.ListsTaskListAdapter;
 import com.eure.citrus.ui.widget.DividerItemDecoration;
 
@@ -68,7 +68,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     }
 
     public void refreshListByGroupName(String groupName) {
-        RealmResults<Task> tasks = RealmRepository.TaskObject.findAllByGroupName(mUIThreadRealm, groupName);
+        RealmResults<Task> tasks = TaskRepository.findAllByGroupName(mUIThreadRealm, groupName);
         mListsTaskListAdapter.setData(tasks);
         mListsTaskListAdapter.notifyDataSetChanged();
     }
@@ -82,9 +82,9 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
 
         if (getArguments() != null) {
             String groupName = getArguments().getString(KEY_GROUP_NAME);
-            tasks = RealmRepository.TaskObject.findAllByGroupName(mUIThreadRealm, groupName);
+            tasks = TaskRepository.findAllByGroupName(mUIThreadRealm, groupName);
         } else {
-            tasks = RealmRepository.TaskObject.findAll(mUIThreadRealm);
+            tasks = TaskRepository.findAll(mUIThreadRealm);
             showGroupName = true;
         }
 
@@ -108,7 +108,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
         AppCompatCheckedTextView taskNameText = (AppCompatCheckedTextView) v.findViewById(R.id.lists_task_name);
         mListsTaskListAdapter.changeTaskNameState(v, taskNameText, !task.isCompleted(), getResources());
 
-        RealmRepository.TaskObject.updateByCompleted(mUIThreadRealm, task, !task.isCompleted());
+        TaskRepository.updateByCompleted(mUIThreadRealm, task, !task.isCompleted());
     }
 
     @Override
