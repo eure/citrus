@@ -1,6 +1,6 @@
 # citrus
 **This is an example project that uses AndroidDesignSupportLibrary.**  
-You can create a todo-list simply.
+You can create a todo-list on citrus simply.
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
@@ -17,7 +17,7 @@ You can create a todo-list simply.
 ### Font
 [Calligraphy](https://github.com/chrisjenx/Calligraphy)
 
-### View Tools
+### View Tool
 [butterknife](https://github.com/JakeWharton/butterknife)
 
 ### View
@@ -29,7 +29,7 @@ You can create a todo-list simply.
 ### ORM
 [realm-java](https://github.com/realm/realm-java)
 
-### Memory Tools
+### Memory Tool
 [leakcanary](https://github.com/square/leakcanary)
 
 
