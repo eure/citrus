@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.realm.RealmResults;
 
 /**
@@ -71,6 +71,9 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
         return mTasks.size();
     }
 
+    /**
+     * Change background color, text color
+     */
     public void changeTaskNameState(View view, AppCompatCheckedTextView taskNameText, boolean completed,
             Resources resources) {
         taskNameText.setChecked(completed);
@@ -85,16 +88,16 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @InjectView(R.id.lists_task_name)
+        @Bind(R.id.lists_task_name)
         AppCompatCheckedTextView taskNameText;
 
-        @InjectView(R.id.lists_task_group)
+        @Bind(R.id.lists_task_group)
         AppCompatTextView taskGroupText;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            ButterKnife.inject(this, v);
+            ButterKnife.bind(this, v);
             if (!sShowGroupName) {
                 taskGroupText.setVisibility(View.GONE);
             }

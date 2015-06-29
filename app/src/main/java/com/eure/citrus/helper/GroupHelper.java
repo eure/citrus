@@ -22,6 +22,11 @@ public class GroupHelper {
 
     public static final String PRIVATE = "Private";
 
+    /**
+     *
+     * @param groupName
+     * @param imageView
+     */
     public static void setupDefaultGroupImage(@NonNull String groupName, ImageView imageView) {
         switch (groupName) {
             case WORK:

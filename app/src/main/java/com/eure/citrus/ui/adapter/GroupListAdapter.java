@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.realm.RealmResults;
 
 /**
@@ -67,19 +67,19 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @InjectView(R.id.group_image)
+        @Bind(R.id.group_image)
         ImageView groupImageView;
 
-        @InjectView(R.id.group_name)
+        @Bind(R.id.group_name)
         AppCompatTextView groupNameText;
 
-        @InjectView(R.id.group_description)
+        @Bind(R.id.group_description)
         AppCompatTextView groupDescriptionText;
 
         public ViewHolder(final View v) {
             super(v);
             v.setOnClickListener(this);
-            ButterKnife.inject(this, v);
+            ButterKnife.bind(this, v);
         }
 
         @Override

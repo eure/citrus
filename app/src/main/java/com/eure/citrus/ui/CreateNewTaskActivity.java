@@ -22,8 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import io.realm.Realm;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -38,18 +38,19 @@ public class CreateNewTaskActivity extends AppCompatActivity {
 
     private static final String KEY_GROUP_NAME = "key_group_name";
 
-    @InjectView(R.id.create_task_coordinator_layout)
+    @Bind(R.id.create_task_coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
 
-    @InjectView(R.id.create_task_text_input_layout)
+    @Bind(R.id.create_task_text_input_layout)
     TextInputLayout mTextInputLayout;
 
-    @InjectView(R.id.create_task_edit_text)
+    @Bind(R.id.create_task_edit_text)
     AppCompatEditText mTaskNameEditText;
 
-    @InjectView(R.id.create_task_button)
+    @Bind(R.id.create_task_button)
     BottomButton mCreateTaskButton;
 
+    // If true, it call setResult(RESULT_OK) before finish.
     private boolean mCreatedTask = false;
 
     // Realm instance for the UI thread
@@ -59,7 +60,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_task);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         Toolbar toolbar = findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -109,6 +110,7 @@ public class CreateNewTaskActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 TaskRepository.delete(mUIThreadRealm, task);
+                                mCreatedTask = false;
                             }
                         }
                 )

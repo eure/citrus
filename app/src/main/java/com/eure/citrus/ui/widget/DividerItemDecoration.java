@@ -81,7 +81,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             size = mDivider.getIntrinsicHeight();
             left = parent.getPaddingLeft();
             right = parent.getWidth() - parent.getPaddingRight();
-        } else { //horizontal
+        } else {
+            // Horizontal
             size = mDivider.getIntrinsicWidth();
             top = parent.getPaddingTop();
             bottom = parent.getHeight() - parent.getPaddingBottom();
@@ -94,7 +95,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             if (orientation == LinearLayoutManager.VERTICAL) {
                 top = child.getTop() - params.topMargin;
                 bottom = top + size;
-            } else { //horizontal
+            } else {
+                // Horizontal
                 left = child.getLeft() - params.leftMargin;
                 right = left + size;
             }
@@ -102,14 +104,15 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             mDivider.draw(c);
         }
 
-        // show last divider
+        // Show last divider
         if (mShowLastDivider && childCount > 0) {
             View child = parent.getChildAt(childCount - 1);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             if (orientation == LinearLayoutManager.VERTICAL) {
                 top = child.getBottom() + params.bottomMargin;
                 bottom = top + size;
-            } else { // horizontal
+            } else {
+                // Horizontal
                 left = child.getRight() + params.rightMargin;
                 right = left + size;
             }

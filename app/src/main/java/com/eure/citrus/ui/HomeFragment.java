@@ -23,8 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         return new HomeFragment();
     }
 
-    @InjectView(R.id.home_task_count)
+    @Bind(R.id.home_task_count)
     AppCompatTextView mHomeTaskCountTextView;
 
     private HomeTaskListAdapter mHomeTaskListAdapter;
@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -167,34 +167,37 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
                 if (resultCode == Activity.RESULT_OK) {
                     final RealmResults<Task> uncompletedTasks = TaskRepository
                             .findAllByCompleted(mUIThreadRealm, false);
-                    mHomeTaskListAdapter.setDate(uncompletedTasks);
+                    mHomeTaskListAdapter.setData(uncompletedTasks);
                     updateHomeTaskListAdapter();
                 }
                 break;
         }
     }
 
+    /**
+     * Should call this method after HomeTaskListAdapter's data are changed.
+     */
     private void updateHomeTaskListAdapter() {
         mHomeTaskListAdapter.notifyDataSetChanged();
         mHomeTaskCountTextView.setText(String.valueOf(mHomeTaskListAdapter.getItemCount()));
     }
 
     @Override
+    public void onClickMainFAB() {
+        Intent intent = new Intent(getActivity(), CreateNewTaskActivity.class);
+        startActivityForResult(intent, REQUEST_CREATE_TASK_ACTIVITY);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mUIThreadRealm.close();
-    }
-
-    @Override
-    public void onClickMainFAB() {
-        Intent intent = new Intent(getActivity(), CreateNewTaskActivity.class);
-        startActivityForResult(intent, REQUEST_CREATE_TASK_ACTIVITY);
     }
 
 }

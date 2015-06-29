@@ -28,7 +28,6 @@ public class ProfileFragment extends Fragment {
         return new ProfileFragment();
     }
 
-
     // Realm instance for the UI thread
     private Realm mUIThreadRealm;
 
@@ -42,26 +41,30 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Count of uncompleted tasks
         AppCompatTextView uncompletedTaskCount = findById(view, R.id.profile_uncompleted_count_text);
         long uncompletedCount = TaskRepository.countByCompleted(mUIThreadRealm, false);
         uncompletedTaskCount.setText(String.valueOf(uncompletedCount));
 
+        // Count of completed tasks
         AppCompatTextView completedTaskCount = findById(view, R.id.profile_completed_count_text);
         long completedCount = TaskRepository.countByCompleted(mUIThreadRealm, true);
         completedTaskCount.setText(String.valueOf(completedCount));
 
+        // Count of all tasks
         AppCompatTextView allTaskCount = findById(view, R.id.profile_all_count_text);
         long allCount = TaskRepository.count(mUIThreadRealm);
         allTaskCount.setText(String.valueOf(allCount));
 
-        AppCompatTextView status = findById(view, R.id.profile_status_text);
+        // Description about state of task
+        AppCompatTextView state = findById(view, R.id.profile_state_text);
         String stateStr;
         if (completedCount < uncompletedCount) {
             stateStr = getString(R.string.you_can_do_it);
@@ -70,13 +73,13 @@ public class ProfileFragment extends Fragment {
         } else {
             stateStr = getString(R.string.keep_it_up);
         }
-        status.setText(stateStr);
+        state.setText(stateStr);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override

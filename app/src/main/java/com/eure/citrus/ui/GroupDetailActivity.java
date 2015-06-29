@@ -39,7 +39,7 @@ public class GroupDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_detail);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         Toolbar toolbar = findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

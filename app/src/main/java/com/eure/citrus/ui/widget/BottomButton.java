@@ -36,15 +36,33 @@ public class BottomButton extends AppCompatButton {
 
         private static final boolean SNACKBAR_BEHAVIOR_ENABLED;
 
+        static {
+            SNACKBAR_BEHAVIOR_ENABLED = Build.VERSION.SDK_INT >= 11;
+        }
+
         private float mTranslationY;
 
         public Behavior() {
         }
 
+        /**
+         *
+         * @param parent
+         * @param child
+         * @param dependency
+         * @return
+         */
         public boolean layoutDependsOn(CoordinatorLayout parent, BottomButton child, View dependency) {
             return SNACKBAR_BEHAVIOR_ENABLED && dependency instanceof Snackbar.SnackbarLayout;
         }
 
+        /**
+         *
+         * @param parent
+         * @param child
+         * @param dependency
+         * @return
+         */
         public boolean onDependentViewChanged(CoordinatorLayout parent, BottomButton child, View dependency) {
             if (dependency instanceof Snackbar.SnackbarLayout) {
                 this.updateFabTranslationForSnackbar(parent, child, dependency);
@@ -52,6 +70,12 @@ public class BottomButton extends AppCompatButton {
             return false;
         }
 
+        /**
+         *
+         * @param parent
+         * @param bb
+         * @param snackbar
+         */
         private void updateFabTranslationForSnackbar(CoordinatorLayout parent, BottomButton bb, View snackbar) {
             float translationY = this.getFabTranslationYForSnackbar(parent, bb);
             if (translationY != this.mTranslationY) {
@@ -68,6 +92,12 @@ public class BottomButton extends AppCompatButton {
 
         }
 
+        /**
+         *
+         * @param parent
+         * @param bb
+         * @return
+         */
         private float getFabTranslationYForSnackbar(CoordinatorLayout parent, BottomButton bb) {
             float minOffset = 0.0F;
             List dependencies = parent.getDependencies(bb);
@@ -81,10 +111,6 @@ public class BottomButton extends AppCompatButton {
             }
 
             return minOffset;
-        }
-
-        static {
-            SNACKBAR_BEHAVIOR_ENABLED = Build.VERSION.SDK_INT >= 11;
         }
     }
 }

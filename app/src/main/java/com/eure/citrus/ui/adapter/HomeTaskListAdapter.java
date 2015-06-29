@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.realm.RealmResults;
 
 /**
@@ -29,7 +29,7 @@ public class HomeTaskListAdapter extends RecyclerView.Adapter<HomeTaskListAdapte
         mTasks = tasks;
     }
 
-    public void setDate(RealmResults<Task> tasks) {
+    public void setData(RealmResults<Task> tasks) {
         this.mTasks = tasks;
     }
 
@@ -54,15 +54,15 @@ public class HomeTaskListAdapter extends RecyclerView.Adapter<HomeTaskListAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @InjectView(R.id.home_task_name)
+        @Bind(R.id.home_task_name)
         AppCompatTextView taskNameText;
 
-        @InjectView(R.id.home_task_group)
+        @Bind(R.id.home_task_group)
         AppCompatTextView taskGroupText;
 
         public ViewHolder(View v) {
             super(v);
-            ButterKnife.inject(this, v);
+            ButterKnife.bind(this, v);
         }
     }
 }

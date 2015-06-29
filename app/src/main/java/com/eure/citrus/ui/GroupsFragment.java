@@ -13,7 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+
+import static butterknife.ButterKnife.findById;
 
 /**
  * Created by katsuyagoto on 15/06/19.
@@ -27,27 +28,23 @@ public class GroupsFragment extends Fragment {
         return new GroupsFragment();
     }
 
-    @InjectView(R.id.tab_layout)
-    TabLayout mTabLayout;
-
-    @InjectView(R.id.groups_viewpager)
-    ViewPager mViewPager;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_groups, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setViewPager(mViewPager);
-        mTabLayout.setupWithViewPager(mViewPager);
+        TabLayout tabLayout = findById(view, R.id.tab_layout);
+        ViewPager viewPager = findById(view, R.id.groups_viewpager);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void setViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         final GroupsPagerAdapter adapter = new GroupsPagerAdapter(getChildFragmentManager());
         adapter.addCategory(GroupHelper.CATEGORY_POPULAR);
         adapter.addCategory(GroupHelper.CATEGORY_LATEST);
@@ -57,7 +54,7 @@ public class GroupsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
 }

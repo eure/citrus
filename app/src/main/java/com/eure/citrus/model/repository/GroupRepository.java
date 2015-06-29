@@ -13,10 +13,18 @@ import io.realm.RealmResults;
  */
 public class GroupRepository {
 
+    /**
+     * Check whether group data is empty or not
+     */
     public static boolean isEmpty(@NonNull Realm realm) {
         return realm.where(Group.class).findFirst() == null;
     }
 
+    /**
+     * Firstly, create default groups if isEmpty is true.
+     *
+     * @see #isEmpty(Realm)
+     */
     public static void createDefaultGroups(@NonNull Realm realm) {
         if (!isEmpty(realm)) {
             return;
@@ -51,6 +59,12 @@ public class GroupRepository {
         realm.commitTransaction();
     }
 
+    /**
+     *
+     * @param realm
+     * @param categoryName
+     * @return
+     */
     public static RealmResults<Group> findAllByCategoryName(@NonNull Realm realm, String categoryName) {
         return realm
                 .where(Group.class)

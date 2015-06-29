@@ -23,8 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -32,13 +32,13 @@ import static butterknife.ButterKnife.findById;
 
 public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
 
-    @InjectView(R.id.coordinator_layout)
+    @Bind(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
 
-    @InjectView(R.id.drawer_layout)
+    @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @InjectView(R.id.main_fab)
+    @Bind(R.id.main_fab)
     FloatingActionButton mFloatingActionButton;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -57,15 +57,15 @@ public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         Toolbar toolbar = findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
-        setFloatingActionButton();
-        setNavigationView(toolbar);
+        setupNavigationView(toolbar);
+        setupFloatingActionButton();
         switchFragment(R.id.home);
     }
 
-    private void setFloatingActionButton() {
+    private void setupFloatingActionButton() {
         Utils.setFabLayoutParams(mFloatingActionButton, new OnCanSetLayoutParamsListener() {
             @Override
             public void onCanSetLayoutParams() {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
         }
     }
 
-    private void setNavigationView(Toolbar toolbar) {
+    private void setupNavigationView(Toolbar toolbar) {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);

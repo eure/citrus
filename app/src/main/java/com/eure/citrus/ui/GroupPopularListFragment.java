@@ -55,7 +55,7 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_group_list, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -88,7 +88,7 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override

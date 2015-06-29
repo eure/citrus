@@ -22,6 +22,7 @@ public class Citrus extends Application {
         initCalligraphy();
     }
 
+
     private void initRealm() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(getApplicationContext())
                 .name(getString(R.string.db_name))

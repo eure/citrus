@@ -63,7 +63,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lists, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -91,7 +91,6 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
         mListsTaskListAdapter = new ListsTaskListAdapter(getActivity(), tasks, this, showGroupName);
 
         RecyclerView recyclerView = findById(view, R.id.lists_recycler_view);
-
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(Utils.getDrawableResource(getActivity(), R.drawable.line)));
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -114,7 +113,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override

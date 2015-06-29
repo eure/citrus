@@ -17,6 +17,12 @@ import java.util.Locale;
  */
 public class Utils {
 
+    /**
+     *
+     * @param context
+     * @param id
+     * @return
+     */
     public static Drawable getDrawableResource(Context context, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return context.getDrawable(id);
@@ -25,20 +31,30 @@ public class Utils {
         }
     }
 
+    /**
+     * Get "Monday", "Tuesday", ...
+     */
     public static String getDayOfWeekString() {
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
         Calendar calendar = Calendar.getInstance();
         String weekDay = dayFormat.format(calendar.getTime());
         return weekDay;
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getDateString() {
-        SimpleDateFormat dayFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH);
         Calendar calendar = Calendar.getInstance();
         String date = dayFormat.format(calendar.getTime());
         return date;
     }
 
+    /**
+     * Fix floating action button's layout bug.
+     */
     public static void setFabLayoutParams(final FloatingActionButton floatingActionButton,
             final OnCanSetLayoutParamsListener onCanSetLayoutParamsListener) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -58,4 +74,5 @@ public class Utils {
             }
         }
     }
+
 }
