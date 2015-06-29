@@ -1,5 +1,6 @@
 # citrus
-Using DesignSupportLibrary
+**This is an example project that uses AndroidDesignSupportLibrary.**  
+You can create a todo-list simply.
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
