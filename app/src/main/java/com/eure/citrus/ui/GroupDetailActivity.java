@@ -47,7 +47,7 @@ public class GroupDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        setFloatingActionButton();
+        setupFloatingActionButton();
 
         Intent intent = getIntent();
         mGroupName = intent.getStringExtra(KEY_GROUP_NAME);
@@ -67,7 +67,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void setFloatingActionButton() {
+    private void setupFloatingActionButton() {
         final FloatingActionButton floatingActionButton = findById(this, R.id.group_detail_fab);
         Utils.setFabLayoutParams(floatingActionButton, new OnCanSetLayoutParamsListener() {
             @Override
