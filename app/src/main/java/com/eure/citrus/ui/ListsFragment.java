@@ -119,6 +119,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mListsTaskListAdapter.release();
         mUIThreadRealm.close();
     }
 

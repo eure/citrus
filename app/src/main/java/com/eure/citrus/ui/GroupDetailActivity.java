@@ -72,6 +72,7 @@ public class GroupDetailActivity extends AppCompatActivity {
         Utils.setFabLayoutParams(floatingActionButton, new OnCanSetLayoutParamsListener() {
             @Override
             public void onCanSetLayoutParams() {
+                // setMargins to fix floating action button's layout bug
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) floatingActionButton
                         .getLayoutParams();
                 params.setMargins(0, 0, 0, 0);

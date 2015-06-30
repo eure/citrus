@@ -22,9 +22,7 @@ import io.realm.RealmResults;
  */
 public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdapter.ViewHolder> {
 
-    private LayoutInflater mLayoutInflater;
-
-    private Resources mResources;
+    private Context mContext;
 
     private RealmResults<Task> mTasks;
 
@@ -35,8 +33,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
     public ListsTaskListAdapter(Context context, RealmResults<Task> tasks,
             OnRecyclerItemClickListener onRecyclerItemClickListener, boolean showGroupName) {
         super();
-        mResources = context.getResources();
-        mLayoutInflater = LayoutInflater.from(context);
+        mContext = context;
         mTasks = tasks;
         sOnRecyclerItemClickListener = onRecyclerItemClickListener;
         sShowGroupName = showGroupName;
@@ -48,7 +45,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.item_lists_task_list, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.item_lists_task_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -58,7 +55,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
         Task task = mTasks.get(position);
         holder.taskNameText.setChecked(task.isCompleted());
         holder.taskNameText.setText(task.getName());
-        changeTaskNameState(holder.itemView, holder.taskNameText, task.isCompleted(), mResources);
+        changeTaskNameState(holder.itemView, holder.taskNameText, task.isCompleted(), mContext.getResources());
         holder.taskGroupText.setText(task.getGroupName());
     }
 
@@ -84,6 +81,10 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
             view.setBackgroundColor(resources.getColor(android.R.color.white));
             taskNameText.setTextColor(resources.getColor(R.color.mt_black));
         }
+    }
+
+    public void release() {
+        sOnRecyclerItemClickListener = null;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

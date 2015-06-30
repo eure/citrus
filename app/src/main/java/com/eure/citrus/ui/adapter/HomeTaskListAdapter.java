@@ -3,7 +3,6 @@ package com.eure.citrus.ui.adapter;
 import com.eure.citrus.R;
 import com.eure.citrus.model.entity.Task;
 
-import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,13 +18,10 @@ import io.realm.RealmResults;
  */
 public class HomeTaskListAdapter extends RecyclerView.Adapter<HomeTaskListAdapter.ViewHolder> {
 
-    private LayoutInflater mLayoutInflater;
-
     private RealmResults<Task> mTasks;
 
-    public HomeTaskListAdapter(Context context, RealmResults<Task> tasks) {
+    public HomeTaskListAdapter(RealmResults<Task> tasks) {
         super();
-        mLayoutInflater = LayoutInflater.from(context);
         mTasks = tasks;
     }
 
@@ -35,7 +31,7 @@ public class HomeTaskListAdapter extends RecyclerView.Adapter<HomeTaskListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.item_home_task_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_task_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }

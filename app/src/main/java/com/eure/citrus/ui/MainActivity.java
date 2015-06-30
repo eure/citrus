@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnMakeSnackbar {
         Utils.setFabLayoutParams(mFloatingActionButton, new OnCanSetLayoutParamsListener() {
             @Override
             public void onCanSetLayoutParams() {
+                // setMargins to fix floating action button's layout bug
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mFloatingActionButton
                         .getLayoutParams();
                 params.setMargins(0, 0, 0, 0);

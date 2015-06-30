@@ -65,7 +65,7 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
 
         String categoryName = GroupHelper.CATEGORY_POPULAR;
         RealmResults<Group> groups = GroupRepository.findAllByCategoryName(mUIThreadRealm, categoryName);
-        mGroupListAdapter = new GroupListAdapter(getActivity(), groups, this);
+        mGroupListAdapter = new GroupListAdapter(groups, this);
 
         RecyclerView recyclerView = findById(view, R.id.group_list_recycler_view);
         recyclerView.addItemDecoration(
@@ -94,6 +94,7 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mGroupListAdapter.release();
         mUIThreadRealm.close();
     }
 }

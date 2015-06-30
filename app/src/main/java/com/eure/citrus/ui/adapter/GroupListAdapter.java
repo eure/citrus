@@ -5,7 +5,6 @@ import com.eure.citrus.helper.GroupHelper;
 import com.eure.citrus.listener.OnRecyclerItemClickListener;
 import com.eure.citrus.model.entity.Group;
 
-import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,23 +21,20 @@ import io.realm.RealmResults;
  */
 public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.ViewHolder> {
 
-    private LayoutInflater mLayoutInflater;
-
     private RealmResults<Group> mGroups;
 
     private static OnRecyclerItemClickListener sOnRecyclerItemClickListener;
 
-    public GroupListAdapter(Context context, RealmResults<Group> groups,
+    public GroupListAdapter(RealmResults<Group> groups,
             OnRecyclerItemClickListener onRecyclerItemClickListener) {
         super();
-        mLayoutInflater = LayoutInflater.from(context);
         mGroups = groups;
         sOnRecyclerItemClickListener = onRecyclerItemClickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.item_group_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_group_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -64,6 +60,10 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.View
         return mGroups.size();
     }
 
+
+    public void release() {
+        sOnRecyclerItemClickListener = null;
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

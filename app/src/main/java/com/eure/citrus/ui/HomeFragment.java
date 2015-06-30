@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener {
         final RealmResults<Task> uncompletedTasks = TaskRepository
                 .findAllByCompleted(mUIThreadRealm, false);
         mHomeTaskCountTextView.setText(String.valueOf(uncompletedTasks.size()));
-        mHomeTaskListAdapter = new HomeTaskListAdapter(getActivity(), uncompletedTasks);
+        mHomeTaskListAdapter = new HomeTaskListAdapter(uncompletedTasks);
 
         RecyclerView recyclerView = findById(view, R.id.home_recycle_view);
         recyclerView.addItemDecoration(
