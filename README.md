@@ -1,10 +1,12 @@
 # citrus
-**This is an example project that uses AndroidDesignSupportLibrary.**  
-minSdkVersion **9**
+
+citrus has some super animations, and custom views for the good design.
 
 You can create a todo-list on citrus simply.  
 
-citrus has some super animations, and custom views for the good design.
+citrus is an example project that uses AndroidDesignSupportLibrary too.  
+minSdkVersion = 9
+
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
