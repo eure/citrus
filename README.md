@@ -4,6 +4,8 @@ minSdkVersion **9**
 
 You can create a todo-list on citrus simply.  
 
+citrus has some super animations, and custom views for the good design.
+
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/coo.gif)
@@ -42,4 +44,8 @@ You can create a todo-list on citrus simply.
 [License of NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids/blob/master/LICENSE.txt)  
 [License of realm-java](https://github.com/realm/realm-java/blob/master/LICENSE)  
 [License of leakcanary](https://github.com/square/leakcanary/blob/master/LICENSE.txt)  
+
+## Blog
+http://eure.jp/blog/design-support-library/  
+Written in Japanese.
 
