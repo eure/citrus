@@ -4,7 +4,7 @@ citrus has some super animations, and custom views for the good design.
 
 You can create a todo-list on citrus simply.  
 
-citrus is an example project that uses AndroidDesignSupportLibrary too.  
+citrus is an example project that uses **AndroidDesignSupportLibrary** too.  
 minSdkVersion = 9
 
 
