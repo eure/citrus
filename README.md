@@ -1,6 +1,8 @@
 # citrus
 **This is an example project that uses AndroidDesignSupportLibrary.**  
-You can create a todo-list on citrus simply.
+minSdkVersion **9**
+
+You can create a todo-list on citrus simply.  
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
