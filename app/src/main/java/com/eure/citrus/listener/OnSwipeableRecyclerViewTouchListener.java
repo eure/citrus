@@ -365,7 +365,7 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
             @Override
             public void onAnimationUpdate(ValueAnimatorCompat animation) {
                 float fraction = animation.getAnimatedFraction();
-                lp.height = (int) (((fraction - 1) * -1) * originalHeight);
+                lp.height = (int) (originalHeight * (1 - fraction));
                 dismissView.setLayoutParams(lp);
             }
         });
