@@ -18,14 +18,15 @@
 
 package com.eure.citrus.listener;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
-
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v4.animation.AnimatorCompatHelper;
+import android.support.v4.animation.AnimatorListenerCompat;
+import android.support.v4.animation.AnimatorUpdateListenerCompat;
+import android.support.v4.animation.ValueAnimatorCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -37,8 +38,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
 
@@ -173,7 +172,7 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
                 }
 
                 if (mDownView != null && mAnimatingPosition != mRecyclerView.getChildAdapterPosition(mDownView)) {
-                    mAlpha = ViewHelper.getAlpha(mDownView);
+                    mAlpha = ViewCompat.getAlpha(mDownView);
                     mDownX = motionEvent.getRawX();
                     mDownY = motionEvent.getRawY();
                     mDownPosition = mRecyclerView.getChildAdapterPosition(mDownView);
@@ -194,7 +193,7 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
 
                 if (mDownView != null && mSwiping) {
                     // cancel
-                    animate(mDownView)
+                    ViewCompat.animate(mDownView)
                             .translationX(0)
                             .alpha(mAlpha)
                             .setDuration(mAnimationTime)
@@ -238,19 +237,19 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
                     final int downPosition = mDownPosition;
                     ++mDismissAnimationRefCount;
                     mAnimatingPosition = mDownPosition;
-                    animate(mDownView)
+                    ViewCompat.animate(mDownView)
                             .translationX(dismissRight ? mViewWidth : -mViewWidth)
                             .alpha(0)
                             .setDuration(mAnimationTime)
-                            .setListener(new AnimatorListenerAdapter() {
+                            .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @Override
-                                public void onAnimationEnd(Animator animation) {
+                                public void onAnimationEnd(View view) {
                                     performDismiss(downView, downPosition);
                                 }
                             });
                 } else {
                     // cancel
-                    animate(mDownView)
+                    ViewCompat.animate(mDownView)
                             .translationX(0)
                             .alpha(mAlpha)
                             .setDuration(mAnimationTime)
@@ -280,8 +279,8 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
                 }
 
                 if (mSwiping) {
-                    ViewHelper.setTranslationX(mDownView, deltaX - mSwipingSlop);
-                    ViewHelper.setAlpha(mDownView, Math.max(0f, Math.min(mAlpha,
+                    ViewCompat.setTranslationX(mDownView, deltaX - mSwipingSlop);
+                    ViewCompat.setAlpha(mDownView, Math.max(0f, Math.min(mAlpha,
                             mAlpha * (1f - Math.abs(deltaX) / mViewWidth))));
                     return true;
                 }
@@ -301,11 +300,15 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
         final int originalLayoutParamsHeight = lp.height;
         final int originalHeight = dismissView.getHeight();
 
-        ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 1).setDuration(mAnimationTime);
-
-        animator.addListener(new AnimatorListenerAdapter() {
+        ValueAnimatorCompat animatorCompat = AnimatorCompatHelper.emptyValueAnimator();
+        animatorCompat.setDuration(mAnimationTime);
+        animatorCompat.addListener(new AnimatorListenerCompat() {
             @Override
-            public void onAnimationEnd(Animator animation) {
+            public void onAnimationStart(ValueAnimatorCompat animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(ValueAnimatorCompat animation) {
                 --mDismissAnimationRefCount;
                 if (mDismissAnimationRefCount == 0) {
                     // No active animations, process all pending dismisses.
@@ -330,8 +333,8 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
                     ViewGroup.LayoutParams lp;
                     for (PendingDismissData pendingDismiss : mPendingDismisses) {
                         // Reset view presentation
-                        ViewHelper.setAlpha(pendingDismiss.view, mAlpha);
-                        ViewHelper.setTranslationX(pendingDismiss.view, 0);
+                        ViewCompat.setAlpha(pendingDismiss.view, mAlpha);
+                        ViewCompat.setTranslationX(pendingDismiss.view, 0);
 
                         lp = pendingDismiss.view.getLayoutParams();
                         lp.height = originalLayoutParamsHeight;
@@ -349,18 +352,26 @@ public class OnSwipeableRecyclerViewTouchListener implements RecyclerView.OnItem
                     mAnimatingPosition = ListView.INVALID_POSITION;
                 }
             }
-        });
 
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                lp.height = (Integer) valueAnimator.getAnimatedValue();
+            public void onAnimationCancel(ValueAnimatorCompat animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(ValueAnimatorCompat animation) {
+            }
+        });
+        animatorCompat.addUpdateListener(new AnimatorUpdateListenerCompat() {
+            @Override
+            public void onAnimationUpdate(ValueAnimatorCompat animation) {
+                float fraction = animation.getAnimatedFraction();
+                lp.height = (int) (originalHeight * (1 - fraction));
                 dismissView.setLayoutParams(lp);
             }
         });
 
         mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView));
-        animator.start();
+        animatorCompat.start();
     }
 
     /**
