@@ -40,7 +40,7 @@ minSdkVersion = 9
 [License of Calligraphy](https://github.com/chrisjenx/Calligraphy/blob/master/LICENSE)  
 [License of butterknife](https://github.com/JakeWharton/butterknife/blob/master/LICENSE.txt)  
 [License of CircleImageView](https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt)  
-[License of realm-java](https://github.com/realm/realm-java/blob/master/LICENSE)
+[License of realm-java](https://github.com/realm/realm-java/blob/master/LICENSE)  
 [License of leakcanary](https://github.com/square/leakcanary/blob/master/LICENSE.txt)  
 
 ## Blog
