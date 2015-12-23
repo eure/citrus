@@ -6,6 +6,7 @@ import com.eure.citrus.model.entity.Task;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -46,8 +47,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.item_lists_task_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
         Task task = mTasks.get(position);
         holder.taskNameText.setChecked(task.isCompleted());
         holder.taskNameText.setText(task.getName());
-        changeTaskNameState(holder.itemView, holder.taskNameText, task.isCompleted(), mContext.getResources());
+        changeTaskNameState(holder.itemView, holder.taskNameText, task.isCompleted());
         holder.taskGroupText.setText(task.getGroupName());
     }
 
@@ -71,15 +71,14 @@ public class ListsTaskListAdapter extends RecyclerView.Adapter<ListsTaskListAdap
     /**
      * Change background color, text color
      */
-    public void changeTaskNameState(View view, AppCompatCheckedTextView taskNameText, boolean completed,
-            Resources resources) {
+    public void changeTaskNameState(View view, AppCompatCheckedTextView taskNameText, boolean completed) {
         taskNameText.setChecked(completed);
         if (completed) {
-            view.setBackgroundColor(resources.getColor(R.color.mt_gray5));
-            taskNameText.setTextColor(resources.getColor(R.color.mt_gray6));
+            view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.mt_gray5));
+            taskNameText.setTextColor(ContextCompat.getColor(mContext, R.color.mt_gray6));
         } else {
-            view.setBackgroundColor(resources.getColor(android.R.color.white));
-            taskNameText.setTextColor(resources.getColor(R.color.mt_black));
+            view.setBackgroundColor(ContextCompat.getColor(mContext, android.R.color.white));
+            taskNameText.setTextColor(ContextCompat.getColor(mContext, R.color.mt_black));
         }
     }
 

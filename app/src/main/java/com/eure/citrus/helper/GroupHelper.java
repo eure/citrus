@@ -27,7 +27,7 @@ public class GroupHelper {
      * @param groupName
      * @param imageView
      */
-    public static void setupDefaultGroupImage(@NonNull String groupName, ImageView imageView) {
+    public static void setupDefaultGroupImage(@NonNull String groupName, @NonNull ImageView imageView) {
         switch (groupName) {
             case WORK:
                 imageView.setImageResource(R.drawable.group_work);
