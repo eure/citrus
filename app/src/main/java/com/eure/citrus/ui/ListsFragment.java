@@ -9,6 +9,7 @@ import com.eure.citrus.ui.adapter.ListsTaskListAdapter;
 import com.eure.citrus.ui.widget.DividerItemDecoration;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckedTextView;
@@ -53,8 +54,8 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     private Realm mUIThreadRealm;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         mUIThreadRealm = Realm.getDefaultInstance();
     }
@@ -105,7 +106,7 @@ public class ListsFragment extends Fragment implements OnRecyclerItemClickListen
     public void onClickRecyclerItem(View v, int position) {
         Task task = mListsTaskListAdapter.getItem(position);
         AppCompatCheckedTextView taskNameText = (AppCompatCheckedTextView) v.findViewById(R.id.lists_task_name);
-        mListsTaskListAdapter.changeTaskNameState(v, taskNameText, !task.isCompleted(), getResources());
+        mListsTaskListAdapter.changeTaskNameState(v, taskNameText, !task.isCompleted());
 
         TaskRepository.updateByCompleted(mUIThreadRealm, task, !task.isCompleted());
     }

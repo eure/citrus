@@ -57,6 +57,7 @@
                     android:textSize="24sp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
+                    android:singleLine="true"
                     />
 
         </android.support.design.widget.TextInputLayout>

@@ -10,6 +10,7 @@ import com.eure.citrus.ui.adapter.GroupListAdapter;
 import com.eure.citrus.ui.widget.DividerItemDecoration;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,8 +47,8 @@ public class GroupPopularListFragment extends Fragment implements OnRecyclerItem
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         mUIThreadRealm = Realm.getDefaultInstance();
     }

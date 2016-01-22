@@ -4,6 +4,7 @@ import com.eure.citrus.R;
 import com.eure.citrus.model.repository.TaskRepository;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatTextView;
@@ -32,8 +33,8 @@ public class ProfileFragment extends Fragment {
     private Realm mUIThreadRealm;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         mUIThreadRealm = Realm.getDefaultInstance();
     }
