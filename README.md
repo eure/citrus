@@ -2,11 +2,11 @@
 
 # citrus
 
-citrus has some super animations, and custom views for the good design.
+The citrus has some fantastic animations and custom views for a good design.
 
-You can create a todo-list on citrus simply.  
+We can create a todo-list on citrus easily. 
 
-citrus is an example project that uses **AndroidDesignSupportLibrary** too.  
+The citrus is an example project that uses AndroidDesignSupportLibrary too.  
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
