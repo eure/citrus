@@ -1,6 +1,6 @@
-> Note: This repository is no longer being maintained.
-
 # citrus
+
+> Note: This repository is no longer being maintained.
 
 The citrus has some fantastic animations and custom views for a good design.
 
