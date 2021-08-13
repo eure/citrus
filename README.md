@@ -1,3 +1,5 @@
+> Note: This repository is no longer being maintained.
+
 # citrus
 
 citrus has some super animations, and custom views for the good design.
@@ -5,8 +7,6 @@ citrus has some super animations, and custom views for the good design.
 You can create a todo-list on citrus simply.  
 
 citrus is an example project that uses **AndroidDesignSupportLibrary** too.  
-minSdkVersion = 9
-
 
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/snack.gif)
 ![](https://github.com/eure/citrus/blob/master/docs/gifs/nav.gif)
@@ -42,8 +42,3 @@ minSdkVersion = 9
 [License of CircleImageView](https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt)  
 [License of realm-java](https://github.com/realm/realm-java/blob/master/LICENSE)  
 [License of leakcanary](https://github.com/square/leakcanary/blob/master/LICENSE.txt)  
-
-## Blog
-http://eure.jp/blog/design-support-library/  
-Written in Japanese.
-
